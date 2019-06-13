@@ -1,3 +1,3 @@
-﻿^w::
-	WinSetAlwaysOnTop(WinGetPID("A"))
+﻿#A::
+	WinSetAlwaysOnTop("Toggle", "A")
 Return

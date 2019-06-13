@@ -23,6 +23,7 @@ Toggle_Window(window) {
 		{
 			WinGetPos(X, Y, W, H, window)	; Store window size/location
 			WinSetStyle("-0x00C40000", window)	; Remove borders
+			;Sleep(1) ; wait for borders to be removed so that the window stretches appropriately
 			WinMove(0, 0, A_ScreenWidth, A_ScreenHeight, window)	; Stretch to screen-size
 			Return
 		}
@@ -33,7 +34,7 @@ Toggle_Window(window) {
 			Return
 		}
 	}
-	Else
-		MsgBox(WinGetPID(window))
+	; Else
+	; 	MsgBox(WinGetPID(window))
 	Return	; RETURN if the other IF's don't fire (shouldn't be possible in most cases)
 }
