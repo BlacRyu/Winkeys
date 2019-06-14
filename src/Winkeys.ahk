@@ -1,6 +1,9 @@
 ﻿#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode "Input"
 
+A_ScriptName := "Winkeys"
+A_IconTip := "Winkeys"
+
 ; Win + T + Mouse wheel = Adjust transparency of window under cursor
 ; Win + TT = Remove transparency on active window
 #include WindowTransparency.ahk
