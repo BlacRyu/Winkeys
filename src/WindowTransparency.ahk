@@ -13,11 +13,32 @@ global transparencyTarget := "A" ; The window that we'd like to change the trans
 
 	; Hold Win and Double tap T to remove current window's transparency (since we can't mouse-over a completely invisible window)
 	if ((A_PriorHotkey == A_ThisHotkey) and (A_TimeSincePriorHotkey > 0) and (A_TimeSincePriorHotkey < 250))
-		WinSetTransparent("OFF", "A")
+	{
+		WinSetExStyle("-0x20", transparencyTarget)	; disable click-through
+		WinSetTransparent("OFF", "A") ; disable transparency
+	}
 	KeyWait("T") ; Wait for T key to be released so that Windows' built-in key repeat feature doesn't trigger a double-tap automatically.
 return
 
-#WheelDown:: ; Win + Mousewheel down
+#$C:: ; Win + C (+ T)
+	if (GetKeyState("T", "P") == 1) ; Make sure T key is down as well
+	{
+		curStyle := WinGetExStyle("A")	; Get the style of the window
+		if (curStyle != "")
+		{
+			if (curStyle & "+0x80000" and curStyle & "+0x20")		; if already click-through
+				WinSetExStyle("-0x20", "A")	; disable click-through
+			else
+				WinSetExStyle("+0x80020", "A")		; enable click-through
+		}
+		Else
+			SendInput "C"
+	}
+	else
+		SendInput "C"
+return
+
+#WheelDown:: ; Win + Mousewheel down (+ T)
 	if (GetKeyState("T", "P") == 1) ; Make sure T key is down as well
 	{
 		curTransparency := WinGetTransparent(transparencyTarget)
@@ -30,7 +51,7 @@ return
 		SendInput "{WheelDown}"
 return
 
-#WheelUp:: ; Win + Mousewheel up
+#WheelUp:: ; Win + Mousewheel up (+ T)
 	if (GetKeyState("T", "P") == 1) ; Make sure T key is down as well
 	{
 		curTransparency := WinGetTransparent(transparencyTarget)

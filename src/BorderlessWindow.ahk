@@ -16,7 +16,7 @@ Return
 
 Toggle_Window(window) {
 	global X, Y, W, H	; Since Toggle_Window() is a function, set up X, Y, W, and H as globals
-	curStyle := WinGetStyle(window)	; Get the style of the window
+	local curStyle := WinGetStyle(window)	; Get the style of the window
 	If (curStyle != "")
 	{
 		If (curStyle & "+0x00C40000")		; If not borderless
