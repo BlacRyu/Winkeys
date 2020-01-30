@@ -5,8 +5,8 @@ W := A_ScreenWidth
 H := A_ScreenHeight
 
 
-#!Enter::
-	Toggle_Window("A")
+#!Enter:: ; Win + Alt + Enter
+	ToggleWindow("A")
 Return
 
 ; !^w::
@@ -14,7 +14,7 @@ Return
 ;	 Toggle_Window(window)
 ; Return
 
-Toggle_Window(window) {
+ToggleWindow(window) {
 	global X, Y, W, H	; Since Toggle_Window() is a function, set up X, Y, W, and H as globals
 	local curStyle := WinGetStyle(window)	; Get the style of the window
 	If (curStyle != "")

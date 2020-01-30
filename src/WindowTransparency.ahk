@@ -1,12 +1,13 @@
 ; Win + T + Mouse wheel = Adjust transparency of window under cursor
 ; Win + TT = Remove transparency on active window
+; Win + T + C = Toggle click-through
 #InstallKeybdHook
 #MaxHotkeysPerInterval 100
 #HotkeyInterval 1000
 
 global transparencyTarget := "A" ; The window that we'd like to change the transparency of.
 
-#$T:: ; Win + T
+#$T:: ; Win + T, (Win + TT)
 	; Lock in which window we affect in case the cursor drifts or the target window becomes fully transparent.
 	MouseGetPos(, , mouseWindow)
 	transparencyTarget := "ahk_id " . mouseWindow

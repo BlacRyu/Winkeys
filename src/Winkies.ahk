@@ -1,8 +1,10 @@
-﻿#Warn  ; Enable warnings to assist with detecting common errors.
+#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode "Input"
 
-A_ScriptName := "Winkeys"
-A_IconTip := "Winkeys"
+A_ScriptName := "Winkies"
+A_IconTip := "Winkies"
+
+LoadConfigs()
 
 ; Win + T + Mouse wheel = Adjust transparency of window under cursor
 ; Win + TT = Remove transparency on active window
@@ -16,3 +18,14 @@ A_IconTip := "Winkeys"
 
 ; Win + A = Toggles whether the current window will always display on top of other windows or not
 #include AlwaysOnTop.ahk
+
+
+
+LoadConfigs() {
+	If (FileExist("winkies.ini")) {
+		
+	}
+	Else {
+		IniWrite("test value","winkies.ini", "test section", "test key")
+	}
+}
