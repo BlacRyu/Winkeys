@@ -9,11 +9,16 @@ H := A_ScreenHeight
 	ToggleWindow("A")
 Return
 
+#B:: ; Win + B
+	ToggleBorder("A")
+Return
+
 ; !^w::
 ;	 MouseGetPos,,, window	; Use the ID of the window under the mouse.
 ;	 Toggle_Window(window)
 ; Return
 
+; Toggles the current window between borderless fullscreen mode, and normal windowed mode.
 ToggleWindow(window) {
 	global X, Y, W, H	; Since Toggle_Window() is a function, set up X, Y, W, and H as globals
 	local curStyle := WinGetStyle(window)	; Get the style of the window
@@ -23,7 +28,7 @@ ToggleWindow(window) {
 		{
 			WinGetPos(X, Y, W, H, window)	; Store window size/location
 			WinSetStyle("-0x00C40000", window)	; Remove borders
-			;Sleep(1) ; wait for borders to be removed so that the window stretches appropriately
+			;Sleep(100) ; wait for borders to be removed so that the window stretches appropriately
 			WinMove(0, 0, A_ScreenWidth, A_ScreenHeight, window)	; Stretch to screen-size
 			Return
 		}
@@ -37,4 +42,14 @@ ToggleWindow(window) {
 	; Else
 	; 	MsgBox(WinGetPID(window))
 	Return	; RETURN if the other IF's don't fire (shouldn't be possible in most cases)
+}
+
+; Toggles the title bar on the current window
+ToggleBorder(window) {
+	local curStyle := WinGetStyle(window)
+	If (curStyle != "")
+	{
+		WinSetStyle("^0x00C40000", window)	; Toggle borders
+	}
+	Return
 }
